@@ -22,6 +22,7 @@ import { BuyCropsComponent } from './buy-crops/buy-crops.component';
 import { CropFilterPipe } from './pipes/crop-filter/crop-filter.pipe';
 import { HireWorkerComponent } from './hire-worker/hire-worker.component';
 import { WorkerFilterPipe } from './pipes/worker-filter/worker-filter.pipe';
+import { AssignTaskComponent } from './assign-task/assign-task.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { WorkerFilterPipe } from './pipes/worker-filter/worker-filter.pipe';
     CropFilterPipe,
     HireWorkerComponent,
     WorkerFilterPipe,
+    AssignTaskComponent,
   ],
   imports: [
     BrowserModule,

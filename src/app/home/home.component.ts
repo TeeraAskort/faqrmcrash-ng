@@ -35,4 +35,12 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  public sellItem(index: Number) {
+    this.restService.sellItem(index).subscribe((data) => {
+      if (data) {
+        this.player = data;
+      }
+    });
+  }
 }

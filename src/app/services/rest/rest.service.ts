@@ -68,6 +68,15 @@ export class RestService {
     });
   }
 
+  public sellItem(index: Number) {
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+    return this.http.get<Player>(this.url + `player/item/${index}/sell`, {
+      headers: loginHeaders,
+    });
+  }
+
   public getAllCrops() {
     const loginHeaders: HttpHeaders = new HttpHeaders({
       Authorization: 'Basic ' + localStorage.getItem('player'),
@@ -82,6 +91,15 @@ export class RestService {
       Authorization: 'Basic ' + localStorage.getItem('player'),
     });
     return this.http.get<Worker[]>(this.url + `worker/all`, {
+      headers: loginHeaders,
+    });
+  }
+
+  public getAllTasks() {
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+    return this.http.get<Crop[]>(this.url + `task/all`, {
       headers: loginHeaders,
     });
   }

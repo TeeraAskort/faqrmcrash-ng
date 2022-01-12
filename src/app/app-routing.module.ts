@@ -1,3 +1,4 @@
+import { AssignTaskComponent } from './assign-task/assign-task.component';
 import { HireWorkerComponent } from './hire-worker/hire-worker.component';
 import { BuyCropsComponent } from './buy-crops/buy-crops.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'buy-crops', component: BuyCropsComponent },
   { path: 'hire-worker', component: HireWorkerComponent },
+  { path: 'assign-task/:index', component: AssignTaskComponent },
 ];
 
 @NgModule({
