@@ -1,0 +1,35 @@
+<div class="container my-4" *ngIf="crops">
+    <h2 class="mb-4 text-center">
+        Buy crops <br>
+        <span class="error" *ngIf="error">{{ error }}</span>
+    </h2>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+            <mat-card>
+                <mat-form-field appearance="fill" class="w-100x">
+                    <mat-label>Search crops: </mat-label>
+                    <input type="text" matInput placeholder="daikon" #filterText>
+                </mat-form-field>
+            </mat-card>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4 my-3" *ngFor="let crop of crops | cropFilter: filterText.value">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{ crop.name }}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image src="http://localhost:4040{{ crop.imageUrl }}" alt="{{ crop.name }}">
+                <h3>Price: {{ crop.buyPrice }}€</h3>
+                <mat-card-actions>
+                    <mat-form-field appearance="fill" class="w-100x">
+                        <mat-label>Amount: </mat-label>
+                        <input type="number" matInput placeholder="10" #amount>
+                    </mat-form-field><br>
+                    <button mat-button (click)="buy(crop.id, amount.value)">Buy</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

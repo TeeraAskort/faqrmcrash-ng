@@ -1,1 +1,69 @@
-<p>home works!</p>
+<div class="container my-4" *ngIf="player">
+    <h2 class="text-center">
+        Money: <strong>{{ player.money }}€</strong>
+    </h2>
+
+    <div class="row justify-content-around my-4">
+        <div class="col-12 col-md-6">
+            <h2 class="text-center">Crops</h2>
+            <div class="row justify-content-center" *ngIf="player.crops.length !== 0; else noCrops">
+                <div class="col-12 col-md-6 col-xl-4" *ngFor="let crop of player.crops; index as i">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>{{ crop.name }}</mat-card-title>
+                        </mat-card-header>
+                        <img mat-card-image src="http://localhost:4040{{ crop.imageUrl }}" alt="{{ crop.name }}">
+                        <mat-card-actions>
+                            <button mat-button *ngIf="crop.stage === 'SELL'" (click)="sellCrop(i)">Sell</button>
+                            <button mat-button *ngIf="crop.stage === 'READYTOFARM'" (click)="farmCrop(i)">Farm</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+            <ng-template #noCrops>
+                <h3 class="text-center">You don't have crops</h3>
+            </ng-template>
+        </div>
+        <div class="col-12 col-md-6">
+            <h2 class="text-center">Workers</h2>
+            <div class="row justify-content-center" *ngIf="player.workers.length !== 0; else noWorkers">
+                <div class="col-12 col-md-6 col-xl-4" *ngFor="let worker of player.workers; index as i">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>{{ worker.name }}</mat-card-title>
+                        </mat-card-header>
+                        <img mat-card-image src="http://localhost:4040{{ worker.imageUrl }}" alt="{{ worker.name }}">
+                        <mat-card-actions>
+                            <button mat-button *ngIf="!worker.taskAssignedTo; else taskAssigned">Assign task</button>
+                            <ng-template #taskAssigned>
+                                <h3>Task: {{ worker.taskAssignedTo.type }}</h3>
+                            </ng-template>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+            <ng-template #noWorkers>
+                <h3 class="text-center">You don't have workers</h3>
+            </ng-template>
+        </div>
+        <div class="col-12">
+            <h2 class="text-center">Items</h2>
+            <div class="row justify-content-center" *ngIf="player.items.length !== 0; else noItems">
+                <div class="col-12 col-md-6 col-xl-4" *ngFor="let item of player.items">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>{{ item.name }}</mat-card-title>
+                        </mat-card-header>
+                        <img mat-card-image src="http://localhost:4040{{ item.imageUrl }}" alt="{{ item.name }}">
+                        <mat-card-actions>
+                            <button mat-button>Sell</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+            <ng-template #noItems>
+                <h3 class="text-center">You don't have items</h3>
+            </ng-template>
+        </div>
+    </div>
+</div>

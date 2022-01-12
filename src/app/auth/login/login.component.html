@@ -1,14 +1,24 @@
-<mat-grid-list cols="4">
-    <mat-grid-tile>
+<div class="row justify-content-center my-4">
+    <div class="col-12 col-sm-6 col-md-4 col-xl-3">
         <mat-card>
-            <mat-card-title>Login</mat-card-title>
-            <mat-card-content>
-
+            <mat-card-title class="mb-3">Login</mat-card-title>
+            <mat-card-content class="mt-1">
+                <mat-form-field appearance="fill" class="w-100x">
+                    <mat-label>Username: </mat-label>
+                    <input type="text" matInput placeholder="Username" [(ngModel)]="username">
+                </mat-form-field><br>
+                <mat-form-field appearance="fill" class="w-100x">
+                    <mat-label>Password: </mat-label>
+                    <input type="password" matInput placeholder="Password" [(ngModel)]="password">
+                </mat-form-field>
+                <p class="error" *ngIf="error">
+                    {{ error }}
+                </p>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-button>Login</button>
-                <button mat-button>Register</button>
+                <button mat-button (click)="login()">Login</button>
+                <button mat-button [routerLink]="[ '/register' ]">Register</button>
             </mat-card-actions>
         </mat-card>
-    </mat-grid-tile>
-</mat-grid-list>
+    </div>
+</div>
