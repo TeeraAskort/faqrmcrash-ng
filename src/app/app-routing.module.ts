@@ -13,9 +13,17 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'buy-crops', component: BuyCropsComponent },
-  { path: 'hire-worker', component: HireWorkerComponent },
-  { path: 'assign-task/:index', component: AssignTaskComponent },
+  { path: 'buy-crops', component: BuyCropsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'hire-worker',
+    component: HireWorkerComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'assign-task/:index',
+    component: AssignTaskComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
