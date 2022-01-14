@@ -1,0 +1,19 @@
+<div class="container" *ngIf="player">
+    <h2 class="text-center mt-4">Items</h2>
+    <div class="row justify-content-center" *ngIf="player.items.length !== 0; else noItems">
+        <div class="col-12 col-md-6 col-xl-4" *ngFor="let item of player.items; index as i">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{ item.name }}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image src="http://localhost:4040{{ item.imageUrl }}" alt="{{ item.name }}">
+                <mat-card-actions>
+                    <button mat-button (click)="sellItem(i)">Sell</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+    <ng-template #noItems>
+        <h3 class="text-center">You don't have items</h3>
+    </ng-template>
+</div>

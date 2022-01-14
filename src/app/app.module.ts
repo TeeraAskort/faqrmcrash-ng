@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -23,6 +24,11 @@ import { CropFilterPipe } from './pipes/crop-filter/crop-filter.pipe';
 import { HireWorkerComponent } from './hire-worker/hire-worker.component';
 import { WorkerFilterPipe } from './pipes/worker-filter/worker-filter.pipe';
 import { AssignTaskComponent } from './assign-task/assign-task.component';
+import { StatsComponent } from './stats/stats.component';
+import { LeaderboardComponent } from './lists/leaderboard/leaderboard.component';
+import { CropListComponent } from './lists/crop-list/crop-list.component';
+import { WorkerListComponent } from './lists/worker-list/worker-list.component';
+import { ItemListComponent } from './lists/item-list/item-list.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +42,11 @@ import { AssignTaskComponent } from './assign-task/assign-task.component';
     HireWorkerComponent,
     WorkerFilterPipe,
     AssignTaskComponent,
+    StatsComponent,
+    LeaderboardComponent,
+    CropListComponent,
+    WorkerListComponent,
+    ItemListComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +59,7 @@ import { AssignTaskComponent } from './assign-task/assign-task.component';
     MatFormFieldModule,
     MatInputModule,
     MatMenuModule,
+    MatTableModule,
     HttpClientModule,
     FormsModule,
   ],

@@ -1,9 +1,9 @@
 <mat-toolbar>
     <span><button mat-button routerLink="/home" class="top-link">Farmcrash</button></span>
-    <span><button mat-button routerLink="/buy-crops" class="link">Buy crops</button></span>
-    <span><button mat-button routerLink="/hire-worker" class="link">Hire worker</button></span>
+    <span><button mat-button routerLink="/buy-crops" class="link" *ngIf="logged">Buy crops</button></span>
+    <span><button mat-button routerLink="/hire-worker" class="link" *ngIf="logged">Hire worker</button></span>
     <span>
-        <button mat-button [matMenuTriggerFor]="lists" class="link">Lists</button>
+        <button mat-button [matMenuTriggerFor]="lists" class="link" *ngIf="logged">Lists</button>
         <mat-menu #lists="matMenu">
             <button mat-menu-item routerLink="/leaderboard">Leaderboard</button>
             <button mat-menu-item routerLink="/crop-list">Crop list</button>
@@ -11,6 +11,10 @@
             <button mat-menu-item routerLink="/item-list">Item list</button>
         </mat-menu>
     </span>
-    <span><button mat-button routerLink="/stats" class="link">Stats</button></span>
-    <span><button mat-button class="link" (click)="logout()">Logout</button></span>
+    <span><button mat-button routerLink="/stats" class="link" *ngIf="logged">Stats</button></span>
+    <div class="w-100x d-flex flex-row justify-content-end align-items-center" *ngIf="player">
+        <img src="http://localhost:4040/{{player.image}}" alt="Profile picture" class="pfp">
+        <span class="link">{{ player.name }}</span>
+        <span><button mat-button class="link" (click)="logout()" *ngIf="logged">Logout</button></span>
+    </div>
 </mat-toolbar>

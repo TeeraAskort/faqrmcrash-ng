@@ -12,6 +12,7 @@ import { Worker } from '../models/worker.interface';
 export class HireWorkerComponent implements OnInit {
   public workers: Worker[] | undefined = undefined;
   public player: Player | undefined = undefined;
+  public error: string | undefined = undefined;
 
   constructor(private restService: RestService, private router: Router) {
     this.restService.fetchPlayerData().subscribe((data) => {
@@ -40,10 +41,15 @@ export class HireWorkerComponent implements OnInit {
   ngOnInit(): void {}
 
   public hireWorker(id: Number) {
-    this.restService.hireWorker(id).subscribe((data) => {
-      if (data) {
-        this.router.navigate(['/home']);
+    this.restService.hireWorker(id).subscribe(
+      (data) => {
+        if (data) {
+          this.router.navigate(['/home']);
+        }
+      },
+      (error) => {
+        this.error = error.error;
       }
-    });
+    );
   }
 }

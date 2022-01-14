@@ -1,0 +1,23 @@
+<div class="container" *ngIf="player">
+    <h2 class="text-center">Workers</h2>
+    <div class="row justify-content-center" *ngIf="player.workers.length !== 0; else noWorkers">
+        <div class="col-12 col-md-6 col-xl-4" *ngFor="let worker of player.workers; index as i">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{ worker.name }}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image src="http://localhost:4040{{ worker.imageUrl }}" alt="{{ worker.name }}">
+                <mat-card-actions>
+                    <button mat-button *ngIf="!worker.taskAssignedTo; else taskAssigned"
+                        routerLink="/assign-task/{{ i }}">Assign task</button>
+                    <ng-template #taskAssigned>
+                        <h3>Task: {{ worker.taskAssignedTo.type }}</h3>
+                    </ng-template>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+    <ng-template #noWorkers>
+        <h3 class="text-center">You don't have workers</h3>
+    </ng-template>
+</div>

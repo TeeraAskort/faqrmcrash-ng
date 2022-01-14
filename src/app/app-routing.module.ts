@@ -1,3 +1,7 @@
+import { WorkerListComponent } from './lists/worker-list/worker-list.component';
+import { CropListComponent } from './lists/crop-list/crop-list.component';
+import { LeaderboardComponent } from './lists/leaderboard/leaderboard.component';
+import { StatsComponent } from './stats/stats.component';
 import { AssignTaskComponent } from './assign-task/assign-task.component';
 import { HireWorkerComponent } from './hire-worker/hire-worker.component';
 import { BuyCropsComponent } from './buy-crops/buy-crops.component';
@@ -7,6 +11,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/login/login.component';
+import { ItemListComponent } from './lists/item-list/item-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -22,6 +27,31 @@ const routes: Routes = [
   {
     path: 'assign-task/:index',
     component: AssignTaskComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'stats',
+    component: StatsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'leaderboard',
+    component: LeaderboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'crop-list',
+    component: CropListComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'worker-list',
+    component: WorkerListComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'item-list',
+    component: ItemListComponent,
     canActivate: [AuthGuard],
   },
 ];

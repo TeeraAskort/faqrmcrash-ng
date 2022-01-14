@@ -1,3 +1,4 @@
+import { StorageService } from './../../services/storage/storage.service';
 import { Component, OnInit } from '@angular/core';
 import { RestService } from 'src/app/services/rest/rest.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -13,7 +14,11 @@ export class LoginComponent implements OnInit {
   public password: String = '';
   public error: any = undefined;
 
-  constructor(private router: Router, private restService: RestService) {}
+  constructor(
+    private router: Router,
+    private restService: RestService,
+    private storageService: StorageService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -23,7 +28,7 @@ export class LoginComponent implements OnInit {
       this.restService.login(this.username, this.password).subscribe((data) => {
         if (data) {
           let player = Buffer.from(this.username + ':' + this.password);
-          localStorage.setItem('player', player.toString('base64'));
+          this.storageService.setItem('player', player.toString('base64'));
           this.router.navigate(['/home']);
         }
       });

@@ -1,0 +1,18 @@
+<div class="container my-4" *ngIf="players">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <table mat-table [dataSource]="players" class="w-100x">
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef>Name</th>
+                    <td mat-cell *matCellDef="let player">{{ player.name }}</td>
+                </ng-container>
+                <ng-container matColumnDef="money">
+                    <th mat-header-cell *matHeaderCellDef>Money</th>
+                    <td mat-cell *matCellDef="let player">{{ player.money }}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                <tr mat-row *matRowDef="let player; columns: columnsToDisplay"></tr>
+            </table>
+        </div>
+    </div>
+</div>

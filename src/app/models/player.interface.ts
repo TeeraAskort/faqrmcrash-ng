@@ -9,4 +9,5 @@ export interface Player {
   crops: Crop[];
   workers: Worker[];
   items: Item[];
+  image: String;
 }

@@ -1,3 +1,4 @@
+import { StorageService } from './../../services/storage/storage.service';
 import { RestService } from './../../services/rest/rest.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -14,7 +15,11 @@ export class RegisterComponent implements OnInit {
   public passwordRepeat: String = '';
   public error: any = undefined;
 
-  constructor(private router: Router, private restService: RestService) {}
+  constructor(
+    private router: Router,
+    private restService: RestService,
+    private storageService: StorageService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -27,7 +32,7 @@ export class RegisterComponent implements OnInit {
           .subscribe((data) => {
             let player = Buffer.from(this.username + ':' + this.password);
             if (data) {
-              localStorage.setItem('player', player.toString('base64'));
+              this.storageService.setItem('player', player.toString('base64'));
               this.router.navigate(['/home']);
             }
           });

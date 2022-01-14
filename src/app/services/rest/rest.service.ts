@@ -1,3 +1,4 @@
+import { Task } from './../../models/task.interface';
 import { Crop } from './../../models/crop.interface';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -6,6 +7,8 @@ import { Buffer } from 'buffer';
 
 import { Player } from '../../models/player.interface';
 import { Worker } from 'src/app/models/worker.interface';
+import { Stats } from 'src/app/models/stats.interface';
+import { ChartData } from 'chart.js';
 
 @Injectable({
   providedIn: 'root',
@@ -99,7 +102,7 @@ export class RestService {
     const loginHeaders: HttpHeaders = new HttpHeaders({
       Authorization: 'Basic ' + localStorage.getItem('player'),
     });
-    return this.http.get<Crop[]>(this.url + `task/all`, {
+    return this.http.get<Task[]>(this.url + `task/all`, {
       headers: loginHeaders,
     });
   }
@@ -120,5 +123,35 @@ export class RestService {
     return this.http.get<Player>(this.url + `player/worker/${id}/hire`, {
       headers: loginHeaders,
     });
+  }
+
+  public fetchStats() {
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+    return this.http.get<ChartData>(this.url + `player/stats`, {
+      headers: loginHeaders,
+    });
+  }
+
+  public fetchLeaderboard() {
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+    return this.http.get<Player[]>(this.url + `player/leaderboard`, {
+      headers: loginHeaders,
+    });
+  }
+
+  public assignTask(id: Number, index: Number) {
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+    return this.http.get<Player[]>(
+      this.url + `player/worker/${index}/assignTask/${id}`,
+      {
+        headers: loginHeaders,
+      }
+    );
   }
 }
