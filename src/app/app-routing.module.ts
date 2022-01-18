@@ -1,3 +1,4 @@
+import { ChangePasswordComponent } from './user/change-password/change-password.component';
 import { WorkerListComponent } from './lists/worker-list/worker-list.component';
 import { CropListComponent } from './lists/crop-list/crop-list.component';
 import { LeaderboardComponent } from './lists/leaderboard/leaderboard.component';
@@ -12,6 +13,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ItemListComponent } from './lists/item-list/item-list.component';
+import { UserInfoComponent } from './user/user-info/user-info.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -52,6 +54,16 @@ const routes: Routes = [
   {
     path: 'item-list',
     component: ItemListComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'user-info',
+    component: UserInfoComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'change-password',
+    component: ChangePasswordComponent,
     canActivate: [AuthGuard],
   },
 ];

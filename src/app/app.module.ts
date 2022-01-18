@@ -29,6 +29,8 @@ import { LeaderboardComponent } from './lists/leaderboard/leaderboard.component'
 import { CropListComponent } from './lists/crop-list/crop-list.component';
 import { WorkerListComponent } from './lists/worker-list/worker-list.component';
 import { ItemListComponent } from './lists/item-list/item-list.component';
+import { UserInfoComponent } from './user/user-info/user-info.component';
+import { ChangePasswordComponent } from './user/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { ItemListComponent } from './lists/item-list/item-list.component';
     CropListComponent,
     WorkerListComponent,
     ItemListComponent,
+    UserInfoComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

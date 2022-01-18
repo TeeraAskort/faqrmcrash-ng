@@ -154,4 +154,16 @@ export class RestService {
       }
     );
   }
+
+  public changeImage(image: File) {
+    const formData: FormData = new FormData();
+
+    formData.append('file', image, image.name);
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+    return this.http.post<Player>(this.url + `player/uploadImage`, formData, {
+      headers: loginHeaders,
+    });
+  }
 }
