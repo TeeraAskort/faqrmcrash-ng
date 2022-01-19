@@ -166,4 +166,25 @@ export class RestService {
       headers: loginHeaders,
     });
   }
+
+  public changePassword(
+    oldPass: String,
+    newPass: String,
+    newPassRepeat: String
+  ) {
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+    return this.http.post<Player>(
+      this.url + `player/changePassword`,
+      {
+        oldPass: oldPass,
+        newPass: newPass,
+        newPassRepeat: newPassRepeat,
+      },
+      {
+        headers: loginHeaders,
+      }
+    );
+  }
 }

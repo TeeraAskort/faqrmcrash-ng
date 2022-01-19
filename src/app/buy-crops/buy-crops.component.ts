@@ -25,16 +25,16 @@ export class BuyCropsComponent implements OnInit {
   public buy(id: Number, amount: string) {
     if (amount) {
       let resAmount: Number = parseInt(amount);
-      this.restService.buyCrop(id, resAmount).subscribe(
-        (data) => {
+      this.restService.buyCrop(id, resAmount).subscribe({
+        next: (data) => {
           if (data) {
             this.router.navigate(['/home']);
           }
         },
-        (error) => {
+        error: (error) => {
           this.error = error.error;
-        }
-      );
+        },
+      });
     }
   }
 }

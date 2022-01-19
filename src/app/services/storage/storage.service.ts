@@ -21,5 +21,9 @@ export class StorageService {
     this.storageSubject.next('changed');
   }
 
+  public sendSignal() {
+    this.storageSubject.next('changed');
+  }
+
   constructor() {}
 }

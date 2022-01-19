@@ -19,18 +19,22 @@ export class HeaderComponent implements OnInit {
     private restService: RestService
   ) {
     this.logged = localStorage.getItem('player') !== null;
-    this.restService.fetchPlayerData().subscribe((data) => {
-      if (data) {
-        this.player = data;
-      }
-    });
-    this.storageService.watchStorage().subscribe(() => {
-      this.logged = localStorage.getItem('player') !== null;
+    if (this.logged) {
       this.restService.fetchPlayerData().subscribe((data) => {
         if (data) {
           this.player = data;
         }
       });
+    }
+    this.storageService.watchStorage().subscribe(() => {
+      this.logged = localStorage.getItem('player') !== null;
+      if (this.logged) {
+        this.restService.fetchPlayerData().subscribe((data) => {
+          if (data) {
+            this.player = data;
+          }
+        });
+      }
     });
   }
 
