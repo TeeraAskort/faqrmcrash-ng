@@ -32,6 +32,8 @@ import { ItemListComponent } from './lists/item-list/item-list.component';
 import { UserInfoComponent } from './user/user-info/user-info.component';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +68,7 @@ import { ChangePasswordComponent } from './user/change-password/change-password.
     MatTableModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

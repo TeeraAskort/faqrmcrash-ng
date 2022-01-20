@@ -3,24 +3,47 @@
         <mat-card>
             <mat-card-title class="mb-3">Register</mat-card-title>
             <mat-card-content class="mt-1">
-                <mat-form-field appearance="fill" class="w-100x">
-                    <mat-label>Username: </mat-label>
-                    <input type="text" matInput placeholder="Username" [(ngModel)]="username">
-                </mat-form-field><br>
-                <mat-form-field appearance="fill" class="w-100x">
-                    <mat-label>Password: </mat-label>
-                    <input type="password" matInput placeholder="Password" [(ngModel)]="password">
-                </mat-form-field><br>
-                <mat-form-field appearance="fill" class="w-100x">
-                    <mat-label>Repeat password: </mat-label>
-                    <input type="password" matInput placeholder="Password" [(ngModel)]="passwordRepeat">
-                </mat-form-field>
-                <p class="error" *ngIf="error">
-                    {{ error }}
-                </p>
+                <form [formGroup]="registerForm" (ngSubmit)="register()">
+                    <mat-form-field appearance="fill" class="w-100x">
+                        <mat-label>Username: </mat-label>
+                        <input type="text" matInput placeholder="Username" formControlName="username">
+
+                    </mat-form-field><br>
+                    <div *ngIf="registerForm.controls['username'].invalid">
+                        <p class="error" *ngIf="registerForm.controls['username'].hasError('required')">
+                            You have to enter your username.
+                        </p>
+                    </div>
+                    <mat-form-field appearance="fill" class="w-100x">
+                        <mat-label>Password: </mat-label>
+                        <input type="password" matInput placeholder="Password" formControlName="passwordRepeat">
+                    </mat-form-field><br>
+                    <div *ngIf="registerForm.controls['passwordRepeat'].invalid">
+                        <p class="error" *ngIf="registerForm.controls['passwordRepeat'].errors?.['required']">
+                            You have to enter your password.
+                        </p>
+                    </div>
+                    <mat-form-field appearance="fill" class="w-100x">
+                        <mat-label>Repeat password: </mat-label>
+                        <input type="password" matInput placeholder="Password" formControlName="passwordRepeat">
+
+                    </mat-form-field>
+                    <div *ngIf="registerForm.controls['passwordRepeat'].invalid">
+                        <p class="error" *ngIf="registerForm.controls['passwordRepeat'].errors?.['required']">
+                            You have to enter your password.
+                        </p>
+                        <p class="error" *ngIf="registerForm.errors?.['passwordsMatch']">
+                            Passwords do not match.
+                        </p>
+                    </div>
+                    <p class="error" *ngIf="error">
+                        {{ error }}
+                    </p>
+                    <button mat-button type="submit">Register</button>
+                </form>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-button (click)="register()">Register</button>
+
                 <button mat-button [routerLink]="['/login']">Login</button>
             </mat-card-actions>
         </mat-card>
