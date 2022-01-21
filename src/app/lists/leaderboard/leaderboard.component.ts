@@ -1,6 +1,6 @@
+import { PlayerListEntry } from './../../models/PlayerListEntry.interface';
 import { RestService } from 'src/app/services/rest/rest.service';
 import { Component, OnInit } from '@angular/core';
-import { Player } from 'src/app/models/player.interface';
 
 @Component({
   selector: 'app-leaderboard',
@@ -8,8 +8,8 @@ import { Player } from 'src/app/models/player.interface';
   styleUrls: ['./leaderboard.component.sass'],
 })
 export class LeaderboardComponent implements OnInit {
-  public players: Player[] | undefined = undefined;
-  public columnsToDisplay = ['name', 'money'];
+  public players: PlayerListEntry[] | undefined = undefined;
+  public columnsToDisplay = ['index', 'image', 'name', 'money'];
 
   constructor(private restSevice: RestService) {
     this.restSevice.fetchLeaderboard().subscribe((data) => {

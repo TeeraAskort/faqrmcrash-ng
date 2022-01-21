@@ -1,3 +1,4 @@
+import { PlayerListEntry } from './../../models/PlayerListEntry.interface';
 import { Task } from './../../models/task.interface';
 import { Crop } from './../../models/crop.interface';
 import { Injectable } from '@angular/core';
@@ -138,7 +139,7 @@ export class RestService {
     const loginHeaders: HttpHeaders = new HttpHeaders({
       Authorization: 'Basic ' + localStorage.getItem('player'),
     });
-    return this.http.get<Player[]>(this.url + `player/leaderboard`, {
+    return this.http.get<PlayerListEntry[]>(this.url + `player/leaderboard`, {
       headers: loginHeaders,
     });
   }

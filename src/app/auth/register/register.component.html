@@ -16,7 +16,7 @@
                     </div>
                     <mat-form-field appearance="fill" class="w-100x">
                         <mat-label>Password: </mat-label>
-                        <input type="password" matInput placeholder="Password" formControlName="passwordRepeat">
+                        <input type="password" matInput placeholder="Password" formControlName="password">
                     </mat-form-field><br>
                     <div *ngIf="registerForm.controls['passwordRepeat'].invalid">
                         <p class="error" *ngIf="registerForm.controls['passwordRepeat'].errors?.['required']">
@@ -26,13 +26,12 @@
                     <mat-form-field appearance="fill" class="w-100x">
                         <mat-label>Repeat password: </mat-label>
                         <input type="password" matInput placeholder="Password" formControlName="passwordRepeat">
-
                     </mat-form-field>
                     <div *ngIf="registerForm.controls['passwordRepeat'].invalid">
                         <p class="error" *ngIf="registerForm.controls['passwordRepeat'].errors?.['required']">
                             You have to enter your password.
                         </p>
-                        <p class="error" *ngIf="registerForm.errors?.['passwordsMatch']">
+                        <p class="error" *ngIf="registerForm.errors?.['passwordsDontMatch']">
                             Passwords do not match.
                         </p>
                     </div>
