@@ -33,6 +33,9 @@ import { UserInfoComponent } from './user/user-info/user-info.component';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { FriendsComponent } from './friends/friends/friends.component';
+import { RequestsComponent } from './friends/requests/requests.component';
+import { SearchComponent } from './friends/search/search.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ItemListComponent,
     UserInfoComponent,
     ChangePasswordComponent,
+    FriendsComponent,
+    RequestsComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

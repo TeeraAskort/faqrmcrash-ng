@@ -1,3 +1,5 @@
+import { FriendRequest } from './../../models/friendRequest.interface';
+import { Page } from './../../models/page.interface';
 import { PlayerListEntry } from './../../models/PlayerListEntry.interface';
 import { Task } from './../../models/task.interface';
 import { Crop } from './../../models/crop.interface';
@@ -183,6 +185,32 @@ export class RestService {
         newPass: newPass,
         newPassRepeat: newPassRepeat,
       },
+      {
+        headers: loginHeaders,
+      }
+    );
+  }
+
+  public searchPlayer(username: String, page: number) {
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+
+    return this.http.get<Page>(
+      this.url + `player/searchUsers/${username}/${page}`,
+      {
+        headers: loginHeaders,
+      }
+    );
+  }
+
+  public getFriendRequests() {
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+
+    return this.http.get<FriendRequest[]>(
+      this.url + `player/getFriendRequests`,
       {
         headers: loginHeaders,
       }

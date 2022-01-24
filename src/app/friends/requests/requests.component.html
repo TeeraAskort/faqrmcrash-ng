@@ -1,0 +1,8 @@
+<div *ngIf="requests">
+    <mat-card *ngFor="let request of requests">
+        <mat-card-title>{{ request.playerSendingRequest.name }} has sent you a friend request</mat-card-title>
+        <mat-card-actions>
+            <button mat-button (click)="acceptFriendRequest(request.playerSendingRequest.name)">Accept request</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
