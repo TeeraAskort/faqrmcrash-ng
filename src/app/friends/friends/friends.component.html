@@ -1,6 +1,39 @@
 <div class="container">
+    <h2>
+        Friends <br>
+        <span class="error" *ngIf="error">{{ error }}</span>
+    </h2>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+            <mat-card>
+                <mat-form-field appearance="fill" class="w-100x">
+                    <mat-label>Search players: </mat-label>
+                    <input type="text" matInput [(ngModel)]="searchText">
+                </mat-form-field>
+            </mat-card>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-12 col-md-4"></div>
-        <div class="col-12 col-md-8"></div>
+        <div class="col-12 col-md-4" *ngIf="!searching">
+            <app-requests [requests]="requests" (addFriend)="addFriend($event)"></app-requests>
+        </div>
+        <div class="col-12 col-md-8" *ngIf="!searching && friends">
+            <mat-list>
+                <mat-list-item *ngFor="let friend of friends">
+                    <img matListAvatar src="http://localhost:4040/{{ friend.image }}" alt="{{ friend.name }}">
+                    <h3 matLine> {{friend.name}} </h3>
+                    <div matLine>
+                        <button mat-button routerLink="/message/{{ friend.name }}">Message</button>
+                        <button mat-button (click)="unfriend(friend.name)">Unfriend</button>
+                        <button mat-button (click)="block(friend.name)">Block</button>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+
+        </div>
+        <div class="col-12" *ngIf="searching">
+            <app-search [searchInputKey]="searchInputKey.asObservable()"></app-search>
+        </div>
     </div>
 </div>

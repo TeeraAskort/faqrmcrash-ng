@@ -15,10 +15,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
+import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BuyCropsComponent } from './buy-crops/buy-crops.component';
 import { CropFilterPipe } from './pipes/crop-filter/crop-filter.pipe';
 import { HireWorkerComponent } from './hire-worker/hire-worker.component';
@@ -32,10 +33,10 @@ import { ItemListComponent } from './lists/item-list/item-list.component';
 import { UserInfoComponent } from './user/user-info/user-info.component';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 
-import { ReactiveFormsModule } from '@angular/forms';
 import { FriendsComponent } from './friends/friends/friends.component';
 import { RequestsComponent } from './friends/requests/requests.component';
 import { SearchComponent } from './friends/search/search.component';
+import { MessageComponent } from './friends/message/message.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { SearchComponent } from './friends/search/search.component';
     FriendsComponent,
     RequestsComponent,
     SearchComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +74,7 @@ import { SearchComponent } from './friends/search/search.component';
     MatInputModule,
     MatMenuModule,
     MatTableModule,
+    MatListModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

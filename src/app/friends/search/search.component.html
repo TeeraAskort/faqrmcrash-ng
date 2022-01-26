@@ -1,1 +1,10 @@
-<p>search works!</p>
+<mat-list *ngIf="players">
+    <mat-list-item *ngFor="let player of players.content">
+        <img matListAvatar src="http://localhost:4040/{{ player.image }}" alt="{{ player.name }}">
+        <h3 matLine> {{player.name}} </h3>
+        <div matLine>
+            <button mat-button (click)="sendFriendRequest(player.name)">Befriend</button>
+            <button mat-button (click)="block(player.name)">Block</button>
+        </div>
+    </mat-list-item>
+</mat-list>

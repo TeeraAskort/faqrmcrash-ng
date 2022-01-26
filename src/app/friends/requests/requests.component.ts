@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class RequestsComponent implements OnInit {
   @Output() addFriend: EventEmitter<String> = new EventEmitter<String>();
-  @Input() requests: FriendRequest[] = [];
+  @Input() requests: FriendRequest[] | undefined = undefined;
 
   constructor() {}
 

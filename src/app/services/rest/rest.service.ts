@@ -5,12 +5,10 @@ import { Task } from './../../models/task.interface';
 import { Crop } from './../../models/crop.interface';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Buffer } from 'buffer';
 
 import { Player } from '../../models/player.interface';
 import { Worker } from 'src/app/models/worker.interface';
-import { Stats } from 'src/app/models/stats.interface';
 import { ChartData } from 'chart.js';
 
 @Injectable({
@@ -211,6 +209,55 @@ export class RestService {
 
     return this.http.get<FriendRequest[]>(
       this.url + `player/getFriendRequests`,
+      {
+        headers: loginHeaders,
+      }
+    );
+  }
+
+  public sendFriendRequest(username: string) {
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+
+    return this.http.get<FriendRequest[]>(
+      this.url + `player/sendFriendRequest/${username}`,
+      {
+        headers: loginHeaders,
+      }
+    );
+  }
+
+  public acceptFriendRequest(username: String) {
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+
+    return this.http.get<FriendRequest[]>(
+      this.url + `player/acceptRequest/${username}`,
+      {
+        headers: loginHeaders,
+      }
+    );
+  }
+
+  public getFriends() {
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+
+    return this.http.get<Player[]>(this.url + `player/getFriends`, {
+      headers: loginHeaders,
+    });
+  }
+
+  public unfriend(username: String) {
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+
+    return this.http.get<FriendRequest[]>(
+      this.url + `player/unfriend/${username}`,
       {
         headers: loginHeaders,
       }
