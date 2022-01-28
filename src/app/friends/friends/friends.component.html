@@ -16,8 +16,17 @@
     </div>
     <div class="row">
         <div class="col-12 col-md-4" *ngIf="!searching">
-            <app-requests [requests]="requests" (addFriend)="addFriend($event)"></app-requests>
+            <div class="row">
+                <div class="col-12">
+                    <app-requests [requests]="requests" (addFriend)="addFriend($event)"></app-requests>
+                </div>
+                <div class="col-12">
+                    <app-blocked [blockedPlayers]="blockedPlayers" (unblockPlayer)="unblock($event)"></app-blocked>
+                </div>
+            </div>
         </div>
+
+
         <div class="col-12 col-md-8" *ngIf="!searching && friends">
             <mat-list>
                 <mat-list-item *ngFor="let friend of friends">
@@ -33,7 +42,8 @@
 
         </div>
         <div class="col-12" *ngIf="searching">
-            <app-search [searchInputKey]="searchInputKey.asObservable()"></app-search>
+            <app-search [searchInputKey]="searchInputKey.asObservable()" [searchText]="searchText"
+                (sendRequest)="sendRequest($event)"></app-search>
         </div>
     </div>
 </div>

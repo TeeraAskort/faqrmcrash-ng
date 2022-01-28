@@ -37,6 +37,7 @@ import { FriendsComponent } from './friends/friends/friends.component';
 import { RequestsComponent } from './friends/requests/requests.component';
 import { SearchComponent } from './friends/search/search.component';
 import { MessageComponent } from './friends/message/message.component';
+import { BlockedComponent } from './friends/blocked/blocked.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { MessageComponent } from './friends/message/message.component';
     RequestsComponent,
     SearchComponent,
     MessageComponent,
+    BlockedComponent,
   ],
   imports: [
     BrowserModule,

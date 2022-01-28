@@ -1,0 +1,9 @@
+<mat-list *ngIf="blockedPlayers">
+    <mat-list-item *ngFor="let player of blockedPlayers">
+        <img matListAvatar src="http://localhost:4040/{{ player.image }}" alt="{{ player.name }}">
+        <h3 matLine> {{player.name}} </h3>
+        <div matLine>
+            <button mat-button (click)="unblock(player.name)">Block</button>
+        </div>
+    </mat-list-item>
+</mat-list>

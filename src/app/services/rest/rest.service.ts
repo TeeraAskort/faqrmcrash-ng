@@ -215,7 +215,7 @@ export class RestService {
     );
   }
 
-  public sendFriendRequest(username: string) {
+  public sendFriendRequest(username: String) {
     const loginHeaders: HttpHeaders = new HttpHeaders({
       Authorization: 'Basic ' + localStorage.getItem('player'),
     });
@@ -262,5 +262,35 @@ export class RestService {
         headers: loginHeaders,
       }
     );
+  }
+
+  public getBlockedPlayers() {
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+
+    return this.http.get<Player[]>(this.url + 'player/getBlockedPlayers', {
+      headers: loginHeaders,
+    });
+  }
+
+  public blockPlayer(username: String) {
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+
+    return this.http.get<Player[]>(this.url + `player/block/${username}`, {
+      headers: loginHeaders,
+    });
+  }
+
+  public unblockPlayer(username: String) {
+    const loginHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + localStorage.getItem('player'),
+    });
+
+    return this.http.get<Player[]>(this.url + `player/unblock/${username}`, {
+      headers: loginHeaders,
+    });
   }
 }

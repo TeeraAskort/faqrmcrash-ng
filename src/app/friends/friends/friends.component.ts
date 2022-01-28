@@ -16,11 +16,14 @@ export class FriendsComponent implements OnInit {
   public searching: boolean = false;
   public searchText: String | undefined = undefined;
   public searchInputKey: Subject<void> = new Subject<void>();
+  public blockedPlayers: Player[] | undefined = undefined;
 
   constructor(private restService: RestService) {
     this.restService.getFriendRequests().subscribe(this.assignRequests);
 
     this.restService.getFriends().subscribe(this.assignFriends);
+
+    this.restService.getBlockedPlayers().subscribe(this.assignBlockedUsers);
 
     let searchInput = document.querySelector('#search');
 
@@ -45,11 +48,30 @@ export class FriendsComponent implements OnInit {
     }
   }
 
-  public block(username: String) {}
+  public block(username: String) {
+    this.restService.blockPlayer(username).subscribe({
+      next: this.assignBlockedUsers,
+      error: this.assignError,
+    });
+  }
+
+  public unblock(username: String) {
+    this.restService.unblockPlayer(username).subscribe({
+      next: this.assignBlockedUsers,
+      error: this.assignError,
+    });
+  }
 
   public unfriend(username: String) {
     this.restService.unfriend(username).subscribe({
       next: this.assignFriends,
+      error: this.assignError,
+    });
+  }
+
+  public sendRequest(username: String) {
+    this.restService.sendFriendRequest(username).subscribe({
+      next: this.assignRequests,
       error: this.assignError,
     });
   }
@@ -68,6 +90,13 @@ export class FriendsComponent implements OnInit {
   private assignFriends(data: any) {
     if (data) {
       this.friends = data;
+      this.error = undefined;
+    }
+  }
+
+  private assignBlockedUsers(data: any) {
+    if (data) {
+      this.blockedPlayers = data;
       this.error = undefined;
     }
   }

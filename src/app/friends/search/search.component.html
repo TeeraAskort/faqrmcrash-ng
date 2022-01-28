@@ -8,3 +8,9 @@
         </div>
     </mat-list-item>
 </mat-list>
+
+<div class="btn-group" role="group" aria-label="Basic example" *ngIf="players">
+    <button type="button" class="btn btn-primary" *ngIf="page > 0" (click)="previous()">Previous</button>
+    <button type="button" class="btn btn-primary" *ngFor="let i of pages" (click)="goToPage(i)">{{ i }}</button>
+    <button type="button" class="btn btn-primary" *ngIf="page < (players.totalPages - 1)" (click)="next()">Next</button>
+</div>
