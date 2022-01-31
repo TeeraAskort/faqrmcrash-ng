@@ -1,3 +1,4 @@
+import { FriendsComponent } from './friends/friends/friends.component';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 import { WorkerListComponent } from './lists/worker-list/worker-list.component';
 import { CropListComponent } from './lists/crop-list/crop-list.component';
@@ -64,6 +65,11 @@ const routes: Routes = [
   {
     path: 'change-password',
     component: ChangePasswordComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'friends',
+    component: FriendsComponent,
     canActivate: [AuthGuard],
   },
 ];

@@ -1,10 +1,10 @@
 <mat-list *ngIf="players">
-    <mat-list-item *ngFor="let player of players.content">
+    <mat-list-item *ngFor="let player of players.content" class="list-item">
         <img matListAvatar src="http://localhost:4040/{{ player.image }}" alt="{{ player.name }}">
-        <h3 matLine> {{player.name}} </h3>
+        <h3 matLine class="text-dark"> {{player.name}} </h3>
         <div matLine>
-            <button mat-button (click)="sendFriendRequest(player.name)">Befriend</button>
-            <button mat-button (click)="block(player.name)">Block</button>
+            <button mat-button (click)="sendFriendRequest(player.name)" class="text-dark">Befriend</button>
+            <button mat-button (click)="block(player.name)" class="text-dark">Block</button>
         </div>
     </mat-list-item>
 </mat-list>

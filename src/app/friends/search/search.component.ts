@@ -18,7 +18,9 @@ export class SearchComponent implements OnInit {
   public page: number = 0;
   public pages: Array<number> | undefined = undefined;
 
-  constructor(private restService: RestService) {
+  constructor(private restService: RestService) {}
+
+  ngOnInit(): void {
     this.searchInputKey?.subscribe(() => {
       if (this.searchText) {
         this.restService.searchPlayer(this.searchText, 0).subscribe((data) => {
@@ -30,8 +32,6 @@ export class SearchComponent implements OnInit {
       }
     });
   }
-
-  ngOnInit(): void {}
 
   public sendFriendRequest(username: String) {
     this.sendRequest.emit(username);

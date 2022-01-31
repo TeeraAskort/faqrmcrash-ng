@@ -2,7 +2,7 @@ import { Player } from './../../models/player.interface';
 import { RestService } from './../../services/rest/rest.service';
 import { FriendRequest } from './../../models/friendRequest.interface';
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-friends',
@@ -10,32 +10,29 @@ import { Subject } from 'rxjs';
   styleUrls: ['./friends.component.sass'],
 })
 export class FriendsComponent implements OnInit {
-  public requests: FriendRequest[] | undefined = undefined;
+  public requests: FriendRequest[] | undefined = [];
   public friends: Player[] | undefined = undefined;
   public error: String | undefined = undefined;
   public searching: boolean = false;
   public searchText: String | undefined = undefined;
   public searchInputKey: Subject<void> = new Subject<void>();
+  // prettier-ignore
+  public friendRequestUpdate: BehaviorSubject<FriendRequest[] | undefined> = new BehaviorSubject<FriendRequest[] | undefined>(undefined);
   public blockedPlayers: Player[] | undefined = undefined;
 
-  constructor(private restService: RestService) {
-    this.restService.getFriendRequests().subscribe(this.assignRequests);
+  constructor(private restService: RestService) {}
 
-    this.restService.getFriends().subscribe(this.assignFriends);
+  ngOnInit(): void {
+    this.restService
+      .getFriendRequests()
+      .subscribe({ next: this.assignRequests });
 
-    this.restService.getBlockedPlayers().subscribe(this.assignBlockedUsers);
+    this.restService.getFriends().subscribe({ next: this.assignFriends });
 
-    let searchInput = document.querySelector('#search');
-
-    searchInput?.addEventListener('focusin', () => {
-      this.searching = true;
-      searchInput?.addEventListener('keyup', () => {
-        this.searchInputKey.next();
-      });
-    });
+    this.restService
+      .getBlockedPlayers()
+      .subscribe({ next: this.assignBlockedUsers });
   }
-
-  ngOnInit(): void {}
 
   public addFriend(name: String) {
     this.restService.acceptFriendRequest(name).subscribe({
@@ -70,15 +67,24 @@ export class FriendsComponent implements OnInit {
   }
 
   public sendRequest(username: String) {
+    this.searching = false;
     this.restService.sendFriendRequest(username).subscribe({
       next: this.assignRequests,
       error: this.assignError,
     });
   }
 
+  public search() {
+    this.searching = true;
+  }
+
+  public keyup() {
+    this.searchInputKey.next();
+  }
+
   private assignRequests(data: any) {
     if (data) {
-      this.requests = data;
+      this.friendRequestUpdate.next(data);
       this.error = undefined;
     }
   }
