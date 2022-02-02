@@ -18,8 +18,8 @@
                         <mat-label>Password: </mat-label>
                         <input type="password" matInput placeholder="Password" formControlName="password">
                     </mat-form-field><br>
-                    <div *ngIf="registerForm.controls['passwordRepeat'].invalid">
-                        <p class="error" *ngIf="registerForm.controls['passwordRepeat'].errors?.['required']">
+                    <div *ngIf="registerForm.controls['password'].invalid">
+                        <p class="error" *ngIf="registerForm.controls['password'].errors?.['required']">
                             You have to enter your password.
                         </p>
                     </div>

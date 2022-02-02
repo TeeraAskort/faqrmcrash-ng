@@ -1,3 +1,4 @@
+import { Player } from 'src/app/models/player.interface';
 import { Page } from './../../models/page.interface';
 import { RestService } from 'src/app/services/rest/rest.service';
 import { Observable } from 'rxjs';
@@ -17,6 +18,7 @@ export class SearchComponent implements OnInit {
   public players: Page | undefined = undefined;
   public page: number = 0;
   public pages: Array<number> | undefined = undefined;
+  public user: Player | undefined = undefined;
 
   constructor(private restService: RestService) {}
 
@@ -29,6 +31,12 @@ export class SearchComponent implements OnInit {
             this.page = this.players.pageable.pageNumber;
           }
         });
+      }
+    });
+
+    this.restService.fetchPlayerData().subscribe((data) => {
+      if (data) {
+        this.user = data;
       }
     });
   }

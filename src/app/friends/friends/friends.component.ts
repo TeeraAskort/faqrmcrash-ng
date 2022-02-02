@@ -10,7 +10,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
   styleUrls: ['./friends.component.sass'],
 })
 export class FriendsComponent implements OnInit {
-  public requests: FriendRequest[] | undefined = [];
+  public requests: FriendRequest[] = [];
   public friends: Player[] | undefined = undefined;
   public error: String | undefined = undefined;
   public searching: boolean = false;
@@ -18,50 +18,85 @@ export class FriendsComponent implements OnInit {
   public searchInputKey: Subject<void> = new Subject<void>();
   // prettier-ignore
   public friendRequestUpdate: BehaviorSubject<FriendRequest[] | undefined> = new BehaviorSubject<FriendRequest[] | undefined>(undefined);
+  // prettier-ignore
+  public blockedPlayersUpdate: BehaviorSubject<Player[] | undefined> = new BehaviorSubject<Player[] | undefined>(undefined);
   public blockedPlayers: Player[] | undefined = undefined;
+  private that = this;
 
   constructor(private restService: RestService) {}
 
   ngOnInit(): void {
-    this.restService
-      .getFriendRequests()
-      .subscribe({ next: this.assignRequests });
+    this.restService.getFriendRequests().subscribe({
+      next: (data) => {
+        this.assignRequests(data, this.that);
+      },
+    });
 
-    this.restService.getFriends().subscribe({ next: this.assignFriends });
+    this.restService.getFriends().subscribe({
+      next: (data) => {
+        this.assignFriends(data, this.that);
+      },
+    });
 
-    this.restService
-      .getBlockedPlayers()
-      .subscribe({ next: this.assignBlockedUsers });
+    this.restService.getBlockedPlayers().subscribe({
+      next: (data) => {
+        this.assignBlockedUsers(data, this.that);
+      },
+    });
   }
 
   public addFriend(name: String) {
     this.restService.acceptFriendRequest(name).subscribe({
-      next: this.assignRequests,
+      next: (data) => {
+        this.assignRequests(data, this.that);
+      },
       error: this.assignError,
     });
 
     if (!this.error) {
-      this.restService.getFriends().subscribe(this.assignFriends);
+      setTimeout(() => {
+        this.restService.getFriends().subscribe({
+          next: (data) => {
+            this.assignFriends(data, this.that);
+          },
+        });
+      }, 2000);
     }
   }
 
   public block(username: String) {
     this.restService.blockPlayer(username).subscribe({
-      next: this.assignBlockedUsers,
+      next: (data) => {
+        this.assignBlockedUsers(data, this.that);
+      },
       error: this.assignError,
     });
+
+    if (!this.error) {
+      setTimeout(() => {
+        this.restService.getFriends().subscribe({
+          next: (data) => {
+            this.assignFriends(data, this.that);
+          },
+        });
+      }, 2000);
+    }
   }
 
   public unblock(username: String) {
     this.restService.unblockPlayer(username).subscribe({
-      next: this.assignBlockedUsers,
+      next: (data) => {
+        this.assignBlockedUsers(data, this.that);
+      },
       error: this.assignError,
     });
   }
 
   public unfriend(username: String) {
     this.restService.unfriend(username).subscribe({
-      next: this.assignFriends,
+      next: (data) => {
+        this.assignFriends(data, this.that);
+      },
       error: this.assignError,
     });
   }
@@ -69,7 +104,9 @@ export class FriendsComponent implements OnInit {
   public sendRequest(username: String) {
     this.searching = false;
     this.restService.sendFriendRequest(username).subscribe({
-      next: this.assignRequests,
+      next: (data) => {
+        this.assignRequests(data, this.that);
+      },
       error: this.assignError,
     });
   }
@@ -82,9 +119,9 @@ export class FriendsComponent implements OnInit {
     this.searchInputKey.next();
   }
 
-  private assignRequests(data: any) {
+  private assignRequests(data: any, that: any) {
     if (data) {
-      this.friendRequestUpdate.next(data);
+      that.friendRequestUpdate.next(data);
       this.error = undefined;
     }
   }
@@ -93,16 +130,16 @@ export class FriendsComponent implements OnInit {
     this.error = error.error;
   }
 
-  private assignFriends(data: any) {
+  private assignFriends(data: any, that: any) {
     if (data) {
-      this.friends = data;
+      that.friends = data;
       this.error = undefined;
     }
   }
 
-  private assignBlockedUsers(data: any) {
+  private assignBlockedUsers(data: any, that: any) {
     if (data) {
-      this.blockedPlayers = data;
+      that.blockedPlayersUpdate.next(data);
       this.error = undefined;
     }
   }

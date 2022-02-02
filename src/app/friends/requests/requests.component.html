@@ -1,8 +1,10 @@
-<div>
-    <mat-card *ngFor="let request of requests">
-        <mat-card-title>{{ request.playerSendingRequest.name }} has sent you a friend request</mat-card-title>
-        <mat-card-actions>
+<mat-list *ngIf="requests">
+    <mat-list-item *ngFor="let request of requests" class="list-item">
+        <img matListAvatar src="http://localhost:4040/{{ request.playerSendingRequest.image }}"
+            alt="{{ request.playerSendingRequest.name }}">
+        <h3 matLine class="text-dark"> {{request.playerSendingRequest.name}} </h3>
+        <div matLine>
             <button mat-button (click)="acceptFriendRequest(request.playerSendingRequest.name)">Accept request</button>
-        </mat-card-actions>
-    </mat-card>
-</div>
+        </div>
+    </mat-list-item>
+</mat-list>

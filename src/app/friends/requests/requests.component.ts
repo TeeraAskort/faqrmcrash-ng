@@ -19,7 +19,7 @@ export class RequestsComponent implements OnInit {
   ngOnInit(): void {
     this.friendRquestsUpdate?.subscribe((data) => {
       if (data) {
-        this.requests = data;
+        this.requests = [...data];
       }
     });
   }

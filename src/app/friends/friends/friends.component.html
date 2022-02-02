@@ -15,23 +15,27 @@
             </mat-card>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mt-3">
         <div class="col-12 col-md-4" *ngIf="!searching">
             <div class="row">
                 <div class="col-12">
+                    <h2>Friend requests</h2>
                     <app-requests [friendRquestsUpdate]="friendRequestUpdate.asObservable()"
                         (addFriend)="addFriend($event)"></app-requests>
                 </div>
                 <div class="col-12">
-                    <app-blocked [blockedPlayers]="blockedPlayers" (unblockPlayer)="unblock($event)"></app-blocked>
+                    <h2>Blocked players</h2>
+                    <app-blocked [blockedPlayersUpdate]="blockedPlayersUpdate.asObservable()"
+                        (unblockPlayer)="unblock($event)"></app-blocked>
                 </div>
             </div>
         </div>
 
 
         <div class="col-12 col-md-8" *ngIf="!searching && friends">
+            <h2>Friend list</h2>
             <mat-list>
-                <mat-list-item *ngFor="let friend of friends">
+                <mat-list-item *ngFor="let friend of friends" class="list-item">
                     <img matListAvatar src="http://localhost:4040/{{ friend.image }}" alt="{{ friend.name }}">
                     <h3 matLine> {{friend.name}} </h3>
                     <div matLine>
@@ -45,7 +49,7 @@
         </div>
         <div class="col-12 col-md-6" *ngIf="searching">
             <app-search [searchInputKey]="searchInputKey.asObservable()" [searchText]="searchText"
-                (sendRequest)="sendRequest($event)"></app-search>
+                (sendRequest)="sendRequest($event)" (blockPlayer)="block($event)"></app-search>
         </div>
     </div>
 </div>
