@@ -21,6 +21,7 @@ export class FriendsComponent implements OnInit {
   // prettier-ignore
   public blockedPlayersUpdate: BehaviorSubject<Player[] | undefined> = new BehaviorSubject<Player[] | undefined>(undefined);
   public blockedPlayers: Player[] | undefined = undefined;
+  public friendRequests: FriendRequest[] | undefined = undefined;
   private that = this;
 
   constructor(private restService: RestService) {}
@@ -120,9 +121,10 @@ export class FriendsComponent implements OnInit {
   }
 
   private assignRequests(data: any, that: any) {
-    if (data) {
+    if (data.length != 0) {
       that.friendRequestUpdate.next(data);
-      this.error = undefined;
+      that.friendRequests = data;
+      that.error = undefined;
     }
   }
 
@@ -131,16 +133,17 @@ export class FriendsComponent implements OnInit {
   }
 
   private assignFriends(data: any, that: any) {
-    if (data) {
+    if (data.length != 0) {
       that.friends = data;
-      this.error = undefined;
+      that.error = undefined;
     }
   }
 
   private assignBlockedUsers(data: any, that: any) {
-    if (data) {
+    if (data.length != 0) {
       that.blockedPlayersUpdate.next(data);
-      this.error = undefined;
+      that.blockedPlayers = data;
+      that.error = undefined;
     }
   }
 }

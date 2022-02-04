@@ -4,7 +4,7 @@
         <span class="error" *ngIf="error">{{ error }}</span>
     </h1>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" [ngClass]="{'d-none': searching}">
         <div class="col-12 col-md-6">
             <mat-card>
                 <mat-form-field appearance="fill" class="w-100x">
@@ -16,25 +16,37 @@
         </div>
     </div>
     <div class="row justify-content-center mt-3">
-        <div class="col-12 col-md-4" *ngIf="!searching">
+        <div class="col-12 col-md-4">
             <div class="row">
                 <div class="col-12">
                     <h2>Friend requests</h2>
                     <app-requests [friendRquestsUpdate]="friendRequestUpdate.asObservable()"
-                        (addFriend)="addFriend($event)"></app-requests>
+                        (addFriend)="addFriend($event)" *ngIf="friendRequests != undefined; else norequests">
+                    </app-requests>
+                    <ng-template #norequests>
+                        <p class="no-value-msg">
+                            You have no requests
+                        </p>
+                    </ng-template>
                 </div>
                 <div class="col-12">
                     <h2>Blocked players</h2>
                     <app-blocked [blockedPlayersUpdate]="blockedPlayersUpdate.asObservable()"
-                        (unblockPlayer)="unblock($event)"></app-blocked>
+                        (unblockPlayer)="unblock($event)" *ngIf="blockedPlayers != undefined;else noblocked">
+                    </app-blocked>
+                    <ng-template #noblocked>
+                        <p class="no-value-msg">
+                            You haven't blocked any player
+                        </p>
+                    </ng-template>
                 </div>
             </div>
         </div>
 
 
-        <div class="col-12 col-md-8" *ngIf="!searching && friends">
+        <div class="col-12 col-md-8">
             <h2>Friend list</h2>
-            <mat-list>
+            <mat-list *ngIf="friends != undefined;else nofriends">
                 <mat-list-item *ngFor="let friend of friends" class="list-item">
                     <img matListAvatar src="http://localhost:4040/{{ friend.image }}" alt="{{ friend.name }}">
                     <h3 matLine> {{friend.name}} </h3>
@@ -45,9 +57,16 @@
                     </div>
                 </mat-list-item>
             </mat-list>
-
+            <ng-template #nofriends>
+                <p class="no-value-msg">
+                    You have no friends
+                </p>
+            </ng-template>
         </div>
-        <div class="col-12 col-md-6" *ngIf="searching">
+
+    </div>
+    <div class="row" [ngClass]="{'d-none': !searching}">
+        <div class="col-12 col-md-6">
             <app-search [searchInputKey]="searchInputKey.asObservable()" [searchText]="searchText"
                 (sendRequest)="sendRequest($event)" (blockPlayer)="block($event)"></app-search>
         </div>
