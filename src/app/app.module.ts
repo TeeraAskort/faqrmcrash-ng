@@ -36,7 +36,6 @@ import { ChangePasswordComponent } from './user/change-password/change-password.
 import { FriendsComponent } from './friends/friends/friends.component';
 import { RequestsComponent } from './friends/requests/requests.component';
 import { SearchComponent } from './friends/search/search.component';
-import { MessageComponent } from './friends/message/message.component';
 import { BlockedComponent } from './friends/blocked/blocked.component';
 
 @NgModule({
@@ -61,7 +60,6 @@ import { BlockedComponent } from './friends/blocked/blocked.component';
     FriendsComponent,
     RequestsComponent,
     SearchComponent,
-    MessageComponent,
     BlockedComponent,
   ],
   imports: [

@@ -51,7 +51,6 @@
                     <img matListAvatar src="http://localhost:4040/{{ friend.image }}" alt="{{ friend.name }}">
                     <h3 matLine> {{friend.name}} </h3>
                     <div matLine>
-                        <button mat-button routerLink="/message/{{ friend.name }}">Message</button>
                         <button mat-button (click)="unfriend(friend.name)">Unfriend</button>
                         <button mat-button (click)="block(friend.name)">Block</button>
                     </div>
