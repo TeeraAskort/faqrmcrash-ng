@@ -6,7 +6,7 @@
                 <mat-card-header>
                     <mat-card-title>{{ crop.name }}</mat-card-title>
                 </mat-card-header>
-                <img mat-card-image src="http://localhost:4040{{ crop.imageUrl }}" alt="{{ crop.name }}">
+                <img mat-card-image src="http://backend.farmcrash.click{{ crop.imageUrl }}" alt="{{ crop.name }}">
                 <mat-card-actions>
                     <button mat-button *ngIf="crop.stage === 'SELL'" (click)="sellCrop(i)">Sell</button>
                     <button mat-button *ngIf="crop.stage === 'READYTOFARM'" (click)="farmCrop(i)">Farm</button>

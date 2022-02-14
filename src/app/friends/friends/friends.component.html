@@ -48,7 +48,7 @@
             <h2>Friend list</h2>
             <mat-list *ngIf="friends != undefined;else nofriends">
                 <mat-list-item *ngFor="let friend of friends" class="list-item">
-                    <img matListAvatar src="http://localhost:4040/{{ friend.image }}" alt="{{ friend.name }}">
+                    <img matListAvatar src="http://backend.farmcrash.click/{{ friend.image }}" alt="{{ friend.name }}">
                     <h3 matLine> {{friend.name}} </h3>
                     <div matLine>
                         <button mat-button (click)="unfriend(friend.name)">Unfriend</button>

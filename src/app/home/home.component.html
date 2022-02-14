@@ -12,7 +12,8 @@
                         <mat-card-header>
                             <mat-card-title>{{ crop.name }}</mat-card-title>
                         </mat-card-header>
-                        <img mat-card-image src="http://localhost:4040{{ crop.imageUrl }}" alt="{{ crop.name }}">
+                        <img mat-card-image src="http://backend.farmcrash.click{{ crop.imageUrl }}"
+                            alt="{{ crop.name }}">
                         <mat-card-content>
                             <h3>
                                 Amount: {{ crop.amount }}
@@ -37,7 +38,8 @@
                         <mat-card-header>
                             <mat-card-title>{{ worker.name }}</mat-card-title>
                         </mat-card-header>
-                        <img mat-card-image src="http://localhost:4040{{ worker.imageUrl }}" alt="{{ worker.name }}">
+                        <img mat-card-image src="http://backend.farmcrash.click{{ worker.imageUrl }}"
+                            alt="{{ worker.name }}">
                         <mat-card-actions>
                             <button mat-button *ngIf="!worker.taskAssignedTo; else taskAssigned"
                                 routerLink="/assign-task/{{ i }}">Assign
@@ -61,7 +63,8 @@
                         <mat-card-header>
                             <mat-card-title>{{ item.name }}</mat-card-title>
                         </mat-card-header>
-                        <img mat-card-image src="http://localhost:4040{{ item.imageUrl }}" alt="{{ item.name }}">
+                        <img mat-card-image src="http://backend.farmcrash.click{{ item.imageUrl }}"
+                            alt="{{ item.name }}">
                         <mat-card-actions>
                             <button mat-button (click)="sellItem(i)">Sell</button>
                         </mat-card-actions>

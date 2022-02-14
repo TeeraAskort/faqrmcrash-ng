@@ -18,7 +18,7 @@
                 <mat-card-header>
                     <mat-card-title>{{ worker.name }}</mat-card-title>
                 </mat-card-header>
-                <img mat-card-image src="http://localhost:4040{{ worker.imageUrl }}" alt="{{ worker.name }}">
+                <img mat-card-image src="http://backend.farmcrash.click{{ worker.imageUrl }}" alt="{{ worker.name }}">
                 <mat-card-actions>
                     <button mat-button *ngIf="!worker.playerHired; else workerHired"
                         (click)="hireWorker(worker.id)">Hire</button>

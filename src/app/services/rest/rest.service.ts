@@ -15,7 +15,7 @@ import { ChartData } from 'chart.js';
   providedIn: 'root',
 })
 export class RestService {
-  private url = 'http://localhost:4040/api/v1/';
+  private url = 'http://backend.farmcrash.click/api/v1/';
 
   constructor(private http: HttpClient) {}
 
