@@ -1,12 +1,10 @@
 <mat-list *ngIf="players">
     <mat-list-item *ngFor="let player of players.content" class="list-item">
-        <div *ngIf="user && player.name !== user.name">
-            <img matListAvatar src="http://backend.farmcrash.click/{{ player.image }}" alt="{{ player.name }}">
-            <h3 matLine class="text-dark"> {{player.name}} </h3>
-            <div matLine>
-                <button mat-button (click)="sendFriendRequest(player.name)" class="text-dark">Befriend</button>
-                <button mat-button (click)="block(player.name)" class="text-dark">Block</button>
-            </div>
+        <img mat-list-avatar src="http://51.103.16.218/{{ player.image }}" alt="{{ player.name }}">
+        <h3 mat-line class="text-dark"> {{player.name}} </h3>
+        <div mat-line>
+            <button mat-button (click)="sendFriendRequest(player.name)" class="text-dark">Befriend</button>
+            <button mat-button (click)="block(player.name)" class="text-dark">Block</button>
         </div>
     </mat-list-item>
 </mat-list>

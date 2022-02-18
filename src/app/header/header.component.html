@@ -14,7 +14,7 @@
     <span><button mat-button routerLink="/stats" class="link" *ngIf="logged">Stats</button></span>
     <span><button mat-button routerLink="/friends" class="link" *ngIf="logged">Friends</button></span>
     <div class="w-100x d-flex flex-row justify-content-end align-items-center" *ngIf="player">
-        <img src="http://backend.farmcrash.click/{{player.image}}" alt="Profile picture" class="pfp" *ngIf="logged">
+        <img src="http://51.103.16.218/{{player.image}}" alt="Profile picture" class="pfp" *ngIf="logged">
         <button mat-button [matMenuTriggerFor]="lists" class="link" *ngIf="logged">{{ player.name }}</button>
         <mat-menu #lists="matMenu">
             <button mat-menu-item routerLink="/user-info">User info</button>
